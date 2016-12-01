@@ -38,8 +38,10 @@ defmodule ElixirChina.UserController do
       "public", "private"
     ]
 
-    if name in bad_name_list do
+    changeset = if name in bad_name_list do
       changeset = Ecto.Changeset.add_error(changeset, :name, "无效的用户名")
+    else
+      changeset
     end
 
     if changeset.valid? do
